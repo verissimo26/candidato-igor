@@ -31,6 +31,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/cadastro', [CadastroCliente::class, 'index']);
+
+Route::prefix('cadastro')->group(function(){
+    Route::get('/',[CadastroCliente::class, 'index'])->name('cadastro-cliente');
+    Route::get('/create',[CadastroCliente::class, 'create'])->name('cadastro-create');
+    Route::post('/',[CadastroCliente::class, 'store'])->name('cadastro-store');
+    Route::get('/{id}/edit',[CadastroCliente::class, 'edit'])->where('id', '[0-9]+')->name('cadastro-edit');
+    Route::put('/{id}',[CadastroCliente::class, 'update'])->where('id', '[0-9]+')->name('cadastro-update');
+});
+
+
+
+Route::fallback(function(){
+    return "Ops pagina não encontrada";
+});
 
 require __DIR__.'/auth.php';

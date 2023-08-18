@@ -1,68 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <h1 class="font-bold text-xl text-center  ">Cadastro de Cliente</h1>
+    <div class="h-[100px] flex justify-center items-center bg-slate-200">
+        <h1 class="text-slate-800 font-bold text-xl text-center ">Cadastro de Cliente</h1>
     </div>
-    <div class="flex bg-slate-100 flex-col p-10">
-        <div class="flex items-center justify-around p-4 w-full">
-            <label for="">CPF</label><input>
-            <label for="">NOME</label><input>
-            <label for="">DATA DE NASC</label><input>
-            <input type="checkbox" name="genero" value="masculino">
-            <label for="genero">Masculino</label>
-
-            <input type="checkbox" name="genero" value="feminino">
-            <label for="genero">Feminino</label>
-
+            <div class="p-8 text-center flex justify-center flex-col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="px-4 mt-3 border-b-2 py-5" scope="col">#</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">NOME </th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">CPF</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">DATA DE NASC</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">ENDEREÇO</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">UF</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">CIDADE</th>
+                            <th class="px-4 mt-3 border-b-2 py-5"  scope="col">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($clientes as $cliente)
+                            <tr class="">
+                                <th class="px-4 py-3" scope="row">1</th>
+                                <td class="px-4 py-3">{{ $cliente->id }}</td>
+                                <td class="px-4 py-3">{{ $cliente->nome }}</td>
+                                <td class="px-4 py-3">{{ $cliente->CPF }}</td>
+                                <td class="px-4 py-3">{{ $cliente->NASC }}</td>
+                                <td class="px-4 py-3">{{ $cliente->endereco }}</td>
+                                <td class="px-4 py-3">{{ $cliente->UF }}</td>
+                                <td class="px-4 py-3">{{ $cliente->CIDADE }}</td>
+                                <td><a href="{{ route('cadastro-edit', ['id'=>$cliente->id])}}">
+                                    <svg class="" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                      </svg>
+                                    </a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <a class="flex justify-center rounded-md bg-slate-700 text-white w-[10%] p-2 items-center m-auto mt-8 hover:opacity-[0.9] ease-in-out duration-50" href="{{ route('cadastro-create') }}">Novo Cadastro</a>
+            </div>
         </div>
-        <div class=" mt-10 flex items-center justify-around p-4 w-full">
-            <label for="">ENDEREÇO</label><input class="text-bold bg-slate-200 w-[45%]">
-            <label for="">CIDADE</label><input>
-            <select name="UF">
-                <option value="SP">Estado</option>
-                <option value="SP">SP</option>
-                <option value="RJ">RJ</option>
-                <option value="MG">MG</option>
-                <option value="CE">CE</option>
-            </select>
-            <select name="CIDADE">
-                <option value="SP">Cidade</option>
-                <option value="SP">Guarulhos</option>
-                <option value="RJ">Niteroi</option>
-                <option value="MG">Salinas</option>
-                <option value="CE">Fortaleza</option>
-            </select>
-        </div>
-        <div class="flex gap-4 justify-end mr-20">
-            <button class="p-3 bg-slate-900 rounded-sm font-bold text-white">Salvar</button>
-            <button class="p-3 bg-slate-900 rounded-sm font-bold text-white">Limpar</button>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">NOME </th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">DATA DE NASC</th>
-                    <th scope="col">ENDEREÇO</th>
-                    <th scope="col">UF</th>
-                    <th scope="col">CIDADE</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($clientes as $cliente)
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>{{ $cliente->nome }}</td>
-                        <td>{{ $cliente->CPF }}</td>
-                        <td>{{ $cliente->NASC }}</td>
-                        <td>{{ $cliente->endereco }}</td>
-                        <td>{{ $cliente->UF }}</td>
-                        <td>{{ $cliente->CIDADE }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 @endsection

@@ -9,6 +9,8 @@ class Cliente extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'nome',
         'CPF',
@@ -16,5 +18,6 @@ class Cliente extends Model
         'endereco',
         'UF',
         'CIDADE',
+        "created_at"
     ];
 }
